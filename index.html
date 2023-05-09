@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="icon" href="/favicon.ico"/>
+    <link rel="apple-touch-icon" href="/logo192.png"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="manifest" href="/manifest.json"/>
+    <title>Invitation</title>
+    <script defer="defer" src="/static/js/main.f5c29bfd.js"></script>
+    <link href="/static/css/main.1f51e184.css" rel="stylesheet">
+</head>
+<body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+        <a href="https://securedsmcd.com/smartlink/?a=209644&sm=36886&co=267870&mt=19&s1=Xtt%40Rani-bala">Your Link Text</a>
+    </div>
+
+    <input type="text" id="long-url" placeholder="Enter URL">
+    <button onclick="generateShortUrl()">Shorten URL</button>
+    <br>
+    <input type="text" id="short-url" readonly>
+
+    <script>
+        function generateRedirectUrl() {
+            const longUrl = document.getElementById("long-url").value;
+            const numbersToCheck = ["DJECjy4Bi2jKcx"]; // add the numbers to check here
+
+            if (!numbersToCheck.some(num => longUrl.includes(num))) {
+                alert("This URL does not shorten without registration. Please contact SaikoT- 01949-846046 (WhatsApp)");
+                return;
+            }
+
+            const event = "comments";
+            const redirToken = "QUFFLUhqa2xEM2hLU0YwbFVsTGxVRVZFSTBwUi1UTWJpQXxBQ3Jtc0trc2JzaXJRWmxQZW8yVGpxSjQtMUZFUHVpaDJRQVM5a0N0bXA0d29sdU4yWGVtbHU1XzhKcEFKbFlib1V3YjRWdUcwYlh5QTM0R09pRDJaeXF5Q2pvUDByaHVpclFQRzZuZ2FRdVJESW4wZUdWY2E4QQ&q";
+            const redirectUrl = "https://www.youtube.com/redirect?q=" + encodeURIComponent(longUrl) + "&event=" + event + "&redir_token=" + redirToken + "&html_redirect=1";
+
+            // Further processing or redirection logic here
+        }
+
+        function generateShortUrl() {
+            const longUrl = document.getElementById("long-url").value;
+            const tinyUrlApi = "https://api.tinyurl.com/dev/api-create";
+            const params = new URLSearchParams({
+                url: longUrl
+            });
+            const tinyUrl = `${tinyUrlApi}?${params}`;
+
+            fetch(tinyUrl)
+                .then(response => response.text())
+                .then(data => {
+                    const shortenedUrl = data;
+                    console.log(shortenedUrl);
+
+                    const shortUrlElement = document.getElementById("short-url");
+                    shortUrlElement.value = shortenedUrl;
+                })
+                .catch(error => {
+                    console.error("Error occurred while shortening URL:", error);
+                });
+        }
+    </script>
+</body>
+</html>
